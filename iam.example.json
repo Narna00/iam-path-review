@@ -1,0 +1,18 @@
+{
+  "schema": "iam-path-review/v1",
+  "principals": [
+    {"id": "user:analyst", "kind": "user"},
+    {"id": "group:finance", "kind": "group"},
+    {"id": "group:approvers", "kind": "group"}
+  ],
+  "memberships": [
+    {"member": "user:analyst", "group": "group:finance"},
+    {"member": "group:finance", "group": "group:approvers"}
+  ],
+  "grants": [
+    {"principal": "group:finance", "action": "payment:create", "resource": "ledger:production"},
+    {"principal": "group:approvers", "action": "payment:approve", "resource": "ledger:production"}
+  ],
+  "rules": [{"id": "SOD-PAYMENT", "all_actions": ["payment:create", "payment:approve"]}],
+  "exceptions": []
+}
